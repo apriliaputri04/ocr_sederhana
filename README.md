@@ -341,4 +341,143 @@ Contohnya untuk mendigitalkan dokumen, membaca teks dari gambar, atau menerjemah
 <br>1. Google Lens – untuk mengenali dan menyalin teks dari gambar atau kamera secara langsung.
 <br>2. Microsoft Office Lens / Adobe Scan – untuk memindai dokumen kertas menjadi file digital (PDF atau Word) yang bisa diedit.
 
+<br>
+<br>
+
+**UJIAN TENGAH SEMESTER (UTS) PRAKTIKUM**
+**<br>Instruksi Awal (SETUP) - Wajib**
+<br>1. Pastikan proyek ocr_sederhana sudah diinisialisasi sebagai repositori Git dan ter
+hubung ke akun GitHub Anda.
+<br>2. Lakukan commit awal untuk memastikan branch main Anda bersih.
+
+![Screenshot](images/12.png)
+
+ **Soal 1: Modifikasi Struktur Navigasi dan Aliran**
+ **<br>1. Pengubahan Navigasi Home**
+ <br>• UbahElevatedButtondiHomeScreen(lib/screens/home_screen.dart) menjadi *widget* **ListTile**.
+
+![Screenshot](images/13.png)
+
+ <br>• AturListTile: leading: Icon(Icons.camera_alt, color: Colors.blue);title: Text(’Mulai Pindai Teks Baru’).
+
+![Screenshot](images/14.png)
+
+ <br>• Fungsi onTap harus menggunakan Navigator.push() untuk ke ScanScreen
+
+ ![Screenshot](images/15.png)
+
+ **2. Teks Utuh dan Navigasi Balik**
+<br>• DiResultScreen(lib/screens/result_screen.dart), hapus fungsi ocrText.replaceAll(’\n’,”) agar hasil teks ditampilkan dengan baris baru (\n) yang utuh.
+
+![Screenshot](images/16.png)
+
+ <br>• Tambahkan FloatingActionButton dengan ikon Icons.home.
+
+![Screenshot](images/17.png)
+
+ <br>• Ketika tombol ditekan, navigasi harus kembali langsung ke HomeScreen menggunakan **Navigator.pushAndRemoveUntil()** (atau metodeyang setara) untuk menghapus semua halaman di atasnya dari stack navigasi.
+
+ ![Screenshot](images/18.png)
+
+ **Perintah Commit Wajib (Soal 1)**
+ <br>Setelah Soal 1 selesai, lakukan commit dan push dengan pesan:
+ ```dart
+ git add lib/screens/home_screen.dart lib/screens/result_screen.dart
+ git commit -m "UTS: Selesai Soal 1- ListTile dan Navigasi Balik"
+ git push origin main
+ ```
+
+ ![Screenshot](images/19.png)
+
+ **Soal 2: Penyesuaian Tampilan dan Penanganan State/Error**
+ **<br>1. Custom Loading Screen di ScanScreen**
+ <br>• DiScanScreen(lib/screens/scan_screen.dart), modifikasi tampilan *loading* yang muncul sebelum kamera siap (if (!controller.value.isInitialized)) :
+
+![Screenshot](images/20.png)
+
+ <br>• Latar Belakang: Scaffold(backgroundColor: Colors.grey[900]).
+
+![Screenshot](images/21.png)
+
+ <br>• Isi: Di dalam Center, tampilkan Column berisi CircularProgressIndicator(color:Colors.yellow).
+
+![Screenshot](images/22.png)
+
+ <br>• Di bawah indikator, tambahkan Text(’Memuat Kamera... Harap tunggu.’,style: TextStyle(color: Colors.white, fontSize: 18)).
+
+![Screenshot](images/23.png)
+
+ **<br>2. Spesifikasi Pesan Error**
+ <br>• Di fungsi _takePicture() pada ScanScreen, modifikasi blok catch (e) untuk mengubah pesan *error* pada SnackBar.
+
+![Screenshot](images/24.png)
+
+<br>• Pesan SnackBar harus berbunyi: "Pemindaian Gagal! Periksa Izin Kamera atau coba lagi." (Hilangkan variabel *error* ($e))
+
+![Screenshot](images/25.png)
+
+**Perintah Commit Wajib (Soal 2)**
+<br> Setelah Soal 2 selesai, lakukan commit dan push dengan pesan:
+```dart
+ git add lib/screens/scan_screen.dart
+ git commit -m "UTS: Selesai Soal 2- Tampilan Loading dan Error"
+ git push origin main
+```
+
+![Screenshot](images/26.png)
+
+**Soal 3: Implementasi Plugin Text-to-Speech (TTS)**
+**<br>1. Instalasi Plugin**
+<br>• Tambahkan *plugin* flutter_tts ke dalam file pubspec.yaml (gunakan versi terbaru yang kompatibel).
+
+![Screenshot](images/27.png)
+
+<br>• Jalankan flutter pub get
+
+![Screenshot](images/28.png)
+
+**<br>2. Konversi Widget dan Inisialisasi**
+<br>• Ubah ResultScreen dari StatelessWidget menjadi **StatefulWidget**.
+
+![Screenshot](images/29.png)
+
+<br>• Di initState(), inisialisasi FlutterTts dan atur bahasa pembacaan menjadi Bahasa Indonesia.
+
+![Screenshot](images/30.png)
+
+<br>• Implementasikan dispose() untuk menghentikan mesin TTS saat halaman ditutup.
+
+![Screenshot](images/31.png)
+
+**<br>3. Fungsionalitas Pembacaan**
+<br>• TambahkanFloatingActionButtonkeduadiResultScreen (atau ganti AppBar dengan action button) dengan ikon Icons.volume_up.
+
+![Screenshot](images/32.png)
+
+<br>• Ketika tombol ditekan, panggil fungsi speak() pada FlutterTts untuk membacakan seluruh isi ocrText.
+
+![Screenshot](images/33.png)
+
+**Perintah Commit Wajib (Soal 3)**
+<br>Setelah Soal 3 selesai, lakukan commit dan push terakhir dengan pesan:
+```dart
+git add pubspec.yaml lib/screens/result_screen.dart
+git commit -m "UTS: Selesai Soal 3- Implementasi Flutter TTS"
+git push origin main
+```
+
+![Screenshot](images/34.png)
+
+**Output**
+![Screenshot](images/35.png)
+
+![Screenshot](images/36.jpg)
+
+![Screenshot](images/37.png)
+
+![Screenshot](images/38.jpg)
+
+![Screenshot](images/39.png)
+
+![Screenshot](images/40.jpg)
 
